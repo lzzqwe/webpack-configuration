@@ -183,3 +183,119 @@
    ```
 
     现在，执行 `npm run build`，检查 `/dist` 文件夹。如果一切顺利，现在只会看到构建后生成的文件，而没有旧文件！ 
+
+## 开发环境
+
+ 在开始前，我们先将 [`mode` 设置为 `'development'`](https://webpack.docschina.org/concepts/mode/#mode-development)。 
+
+ webpack.config.js
+
+```
+const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+  module.exports = {
++   mode: 'development',
+    entry: {
+      app: './src/index.js',
+      print: './src/print.js'
+    },
+    plugins: [
+      new CleanWebpackPlugin(['dist']),
+      new HtmlWebpackPlugin({
+        title: '开发环境'
+      })
+    ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+```
+
+ 使用 source map 
+
+当 webpack 打包源代码时，可能会很难追踪到 error(错误) 和 warning(警告) 在源代码中的原始位置。例如，如果将三个源文件（`a.js`, `b.js` 和 `c.js`）打包到一个 bundle（`bundle.js`）中，而其中一个源文件包含一个错误，那么堆栈跟踪就会直接指向到 `bundle.js`。你可能需要准确地知道错误来自于哪个源文件，所以这种提示这通常不会提供太多帮助。
+
+为了更容易地追踪 error 和 warning，JavaScript 提供了 [source map](http://blog.teamtreehouse.com/introduction-source-maps) 功能，可以将编译后的代码映射回原始源代码。如果一个错误来自于 `b.js`，source map 就会明确的告诉你。
+
+source map 有许多 [可用选项](https://webpack.docschina.org/configuration/devtool)，请务必仔细阅读它们，以便可以根据需要进行配置。
+
+对于本指南，我们将使用 `inline-source-map` 选项，这有助于解释说明示例意图（此配置仅用于示例，不要用于生产环境）：
+
+ webpack.config.js
+
+```
+const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+  module.exports = {
+    mode: 'development',
+    entry: {
+      app: './src/index.js',
+      print: './src/print.js'
+    },
++   devtool: 'inline-source-map',
+    plugins: [
+      new CleanWebpackPlugin(['dist']),
+      new HtmlWebpackPlugin({
+        title: 'Development'
+      })
+    ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+```
+
+### 选择一个开发工具
+
+在每次编译代码时，手动运行 `npm run build` 会显得很麻烦。
+
+webpack 提供几种可选方式，帮助你在代码发生变化后自动编译代码：
+
+1. webpack watch mode(webpack 观察模式)
+2. webpack-dev-server
+3. webpack-dev-middleware
+
+多数场景中，你可能需要使用 `webpack-dev-server`，但是不妨探讨一下以上的所有选项。
+
+-  使用 watch mode(观察模式)  监控打包模式
+
+  你可以指示 webpack "watch" 依赖图中所有文件的更改。如果其中一个文件被更新，代码将被重新编译，所以你不必再去手动运行整个构建。
+
+  我们添加一个用于启动 webpack watch mode 的 npm scripts：
+
+  **package.json**
+
+  ```
+  {
+      "name": "development",
+      "version": "1.0.0",
+      "description": "",
+      "main": "webpack.config.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+  +     "watch": "webpack --watch",
+        "build": "webpack"
+      },
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "devDependencies": {
+        "clean-webpack-plugin": "^0.1.16",
+        "css-loader": "^0.28.4",
+        "csv-loader": "^2.1.1",
+        "file-loader": "^0.11.2",
+        "html-webpack-plugin": "^2.29.0",
+        "style-loader": "^0.18.2",
+        "webpack": "^3.0.0",
+        "xml-loader": "^1.2.1"
+      }
+    }
+  ```
+
+  
