@@ -21,6 +21,13 @@ module.exports = {
             test: /.css$/,
             use: ["style-loader", "css-loader"]
         }, {
+            test: /\.less$/,
+            use: [
+                'vue-style-loader',
+                'css-loader',
+                'less-loader'
+            ]
+        }, {
             test: /\.(png|svg|jpg|gif)$/,
             use: [
                 'file-loader'
@@ -30,6 +37,9 @@ module.exports = {
             use: [
                 'file-loader'
             ]
+        }, {
+            test: /\.vue$/,
+            loader: 'vue-loader'
         }]
     },
     plugins: [ //打包生成html文件 并且可以自动引入文件

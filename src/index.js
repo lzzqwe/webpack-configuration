@@ -1,18 +1,7 @@
-import { cube } from './math.js';
+import Vue from 'vue'
+import App from './app.vue'
 
-if (process.env.NODE_ENV !== 'production') {
-    console.log('Looks like we are in development mode!');
-}
-if (process.env.NODE_ENV === 'development') {
-    console.log('大日本双方都按时');
-}
-
-function component() {
-    var element = document.createElement('pre');
-    element.innerHTML = [
-        'Hello webpack!',
-        '5 cubed is equal to ' + cube(5)
-    ].join('\n\n');
-    return element;
-}
-document.body.appendChild(component());
+new Vue({
+    el: '#root',
+    render: c => c(App)
+})
