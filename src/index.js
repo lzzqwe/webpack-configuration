@@ -1,5 +1,12 @@
 import { cube } from './math.js';
 
+if (process.env.NODE_ENV !== 'production') {
+    console.log('Looks like we are in development mode!');
+}
+if (process.env.NODE_ENV === 'development') {
+    console.log('大日本双方都按时');
+}
+
 function component() {
     var element = document.createElement('pre');
     element.innerHTML = [
