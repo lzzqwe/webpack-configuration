@@ -298,4 +298,82 @@ webpack 提供几种可选方式，帮助你在代码发生变化后自动编译
     }
   ```
 
-  
+   -  使用 webpack-dev-server 
+
+      `webpack-dev-server` 为你提供了一个简单的 web server，并且具有 live reloading(实时重新加载) 功能。设置如下： 
+
+     ```
+     npm install --save-dev webpack-dev-server
+     ```
+
+     修改配置文件，告诉 dev server，从什么位置查找文件：
+
+     **webpack.config.js**
+
+     ```
+     const path = require('path');
+       const HtmlWebpackPlugin = require('html-webpack-plugin');
+       const CleanWebpackPlugin = require('clean-webpack-plugin');
+     
+       module.exports = {
+         mode: 'development',
+         entry: {
+           app: './src/index.js',
+           print: './src/print.js'
+         },
+         devtool: 'inline-source-map',
+     +   devServer: {
+     +     contentBase: './dist'
+     +   },
+         plugins: [
+           new CleanWebpackPlugin(['dist']),
+           new HtmlWebpackPlugin({
+             title: 'Development'
+           })
+         ],
+         output: {
+           filename: '[name].bundle.js',
+           path: path.resolve(__dirname, 'dist')
+         }
+       };
+     ```
+
+      以上配置告知 `webpack-dev-server`，将 `dist` 目录下的文件 serve 到 `localhost:8080` 下。（译注：serve，将资源作为 server 的可访问文件） 
+
+     ```
+     webpack-dev-server 在编译之后不会写入到任何输出文件。而是将 bundle 文件保留在内存中，然后将它们 serve 到 server 中，就好像它们是挂载在 server 根路径上的真实文件一样。如果你的页面希望在其他不同路径中找到 bundle 文件，则可以通过 dev server 配置中的 publicPath 选项进行修改。
+     ```
+
+     我们添加一个可以直接运行 dev server 的 script：
+
+     **package.json**
+
+     ```
+     {
+         "name": "development",
+         "version": "1.0.0",
+         "description": "",
+         "main": "webpack.config.js",
+         "scripts": {
+           "test": "echo \"Error: no test specified\" && exit 1",
+           "watch": "webpack --watch",
+     +     "start": "webpack-dev-server --open",
+           "build": "webpack"
+         },
+         "keywords": [],
+         "author": "",
+         "license": "ISC",
+         "devDependencies": {
+           "clean-webpack-plugin": "^0.1.16",
+           "css-loader": "^0.28.4",
+           "csv-loader": "^2.1.1",
+           "file-loader": "^0.11.2",
+           "html-webpack-plugin": "^2.29.0",
+           "style-loader": "^0.18.2",
+           "webpack": "^3.0.0",
+           "xml-loader": "^1.2.1"
+         }
+       }
+     ```
+
+     
