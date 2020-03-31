@@ -103,5 +103,83 @@
    }
    ```
 
-   
+## 管理输出
 
+1.  设置 HtmlWebpackPlugin （*打包生成html文件 并且可以自动引入文件*）
+
+    首先安装插件，并且调整 `webpack.config.js` 文件： 
+
+   ```
+   npm install --save-dev html-webpack-plugin
+   ```
+
+    webpack.config.js
+
+   ```
+   const path = require('path');
+   + const HtmlWebpackPlugin = require('html-webpack-plugin');
+   
+     module.exports = {
+       entry: {
+         app: './src/index.js',
+         print: './src/print.js'
+       },
+   +   plugins: [
+   +     new HtmlWebpackPlugin({
+   +       title: '管理输出'
+   +     })
+   +   ],
+       output: {
+         filename: '[name].bundle.js',
+         path: path.resolve(__dirname, 'dist')
+       }
+     };
+   ```
+
+    在我们构建之前，你应该了解，虽然在 `dist/` 文件夹我们已经有了 `index.html` 这个文件，然而 `HtmlWebpackPlugin` 还是会默认生成它自己的 `index.html` 文件。也就是说，它会用新生成的 `index.html` 文件，替换我们的原有文件。我们看下执行 `npm run build` 后会发生什么： 
+
+   ```
+   ...
+              Asset       Size  Chunks                    Chunk Names
+    print.bundle.js     544 kB       0  [emitted]  [big]  print
+      app.bundle.js    2.81 kB       1  [emitted]         app
+         index.html  249 bytes          [emitted]
+   ...
+   ```
+
+    如果在代码编辑器中打开 `index.html`，你会看到 `HtmlWebpackPlugin` 创建了一个全新的文件，所有的 bundle 会自动添加到 html 中。
+
+2.  清理-dist-文件夹 
+
+   [`clean-webpack-plugin`](https://www.npmjs.com/package/clean-webpack-plugin) 是一个流行的清理插件，安装和配置它。
+
+   ```
+   npm install --save-dev clean-webpack-plugin
+   ```
+
+    webpack.config.js
+
+   ```
+   const path = require('path');
+     const HtmlWebpackPlugin = require('html-webpack-plugin');
+   + const CleanWebpackPlugin = require('clean-webpack-plugin');
+   
+     module.exports = {
+       entry: {
+         app: './src/index.js',
+         print: './src/print.js'
+       },
+       plugins: [
+   +     new CleanWebpackPlugin(),
+         new HtmlWebpackPlugin({
+           title: '管理输出'
+         })
+       ],
+       output: {
+         filename: '[name].bundle.js',
+         path: path.resolve(__dirname, 'dist')
+       }
+     };
+   ```
+
+    现在，执行 `npm run build`，检查 `/dist` 文件夹。如果一切顺利，现在只会看到构建后生成的文件，而没有旧文件！ 
