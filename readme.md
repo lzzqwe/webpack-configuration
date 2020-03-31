@@ -376,4 +376,45 @@ webpack 提供几种可选方式，帮助你在代码发生变化后自动编译
        }
      ```
 
-     
+
+## 模块热替换
+
+ 模块热替换(hot module replacement 或 HMR)是 webpack 提供的最有用的功能之一。它允许在运行时更新所有类型的模块，而无需完全刷新。本页面重点介绍其**实现**，而 [概念](https://webpack.docschina.org/concepts/hot-module-replacement) 页面提供了更多关于它的工作原理以及为什么它有用的细节。 
+
+### 启用HMR
+
+ 此功能可以很大程度提高生产效率。我们要做的就是更新 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 配置，然后使用 webpack 内置的 HMR 插件。 
+
+ **webpack.config.js** 
+
+```
+const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
++ const webpack = require('webpack');
+
+  module.exports = {
+    entry: {
+-      app: './src/index.js',
+-      print: './src/print.js'
++      app: './src/index.js'
+    },
+    devtool: 'inline-source-map',
+    devServer: {
+      contentBase: './dist',
++     hot: true
+    },
+    plugins: [
+      new CleanWebpackPlugin(['dist']),
+      new HtmlWebpackPlugin({
+        title: '模块热替换'
+      }),
++     new webpack.HotModuleReplacementPlugin()
+    ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+```
+
