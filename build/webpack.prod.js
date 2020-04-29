@@ -1,4 +1,5 @@
  const merge = require('webpack-merge');
+ const path = require('path');
  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
  const MiniCssExtractPlugin = require('mini-css-extract-plugin')
  const TerserJSPlugin = require('terser-webpack-plugin')
@@ -8,6 +9,10 @@
  module.exports = merge(common, {
      mode: 'production',
      devtool: 'source-map',
+     output: {
+         filename: 'js/[name].[contentHash:8].js',
+         path: path.resolve(__dirname, '../dist')
+     },
      module: {
          rules: [{ // 图片 - 考虑 base64 编码的情况
              test: /\.(png|jpg|jpeg|gif)$/,
@@ -18,7 +23,7 @@
                      // 否则，依然延用 file-loader 的形式，产出 url 格式
                      limit: 5 * 1024,
                      // 打包到 img 目录下
-                     outputPath: '/img1/',
+                     outputPath: '/img/',
                  }
              }
          }, {
@@ -74,6 +79,7 @@
      optimization: {
          // 压缩 css
          minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+         usedExports: true, //tree-shakeing
          // 分割代码块
          splitChunks: {
              chunks: 'all',

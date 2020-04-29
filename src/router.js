@@ -8,79 +8,67 @@ Vue.use(Router)
      * 然后当路由被访问的时候才加载对应组件，这样就更加高效了。
      * 结合 Vue 的异步组件和 Webpack 的代码分割功能，轻松实现路由组件的懒加载。
      */
-import NetRecommend from 'components/NetRecommend/NetRecommend.vue'
-import NetSinger from 'components/NetSinger/NetSinger.vue'
-import NetRank from 'components/NetRank/NetRank.vue'
-import NetSearch from 'components/NetSearch/NetSearch.vue'
-import SingerDetail from 'components/SingerDetail/SingerDetail.vue'
-import NetDisc from 'components/NetDisc/NetDisc.vue'
-import NetMine from 'components/NetMine/NetMine.vue'
-import TopList from 'components/TopList/TopList.vue'
-import NetVideo from 'components/NetVideo/NetVideo.vue'
-import VideoDetail from 'components/VideoDetail/VideoDetail.vue'
-import NetList from 'components/NetList/NetList.vue'
-import NetProject from 'components/NetProject/NetProject.vue'
-// const NetRecommend = (resolve) => {
-//     import ('components/NetRecommend/NetRecommend').then((module) => {
-//         resolve(module)
-//     })
-// }
-// const NetSinger = (resolve) => {
-//     import ('components/NetSinger/NetSinger').then((module) => {
-//         resolve(module)
-//     })
-// }
-// const NetRank = (resolve) => {
-//     import ('components/NetRank/NetRank').then((module) => {
-//         resolve(module)
-//     })
-// }
-// const NetSearch = (resolve) => {
-//     import ('components/NetSearch/NetSearch').then((module) => {
-//         resolve(module)
-//     })
-// }
-// const SingerDetail = (resolve) => {
-//     import ('components/SingerDetail/SingerDetail').then((module) => {
-//         resolve(module)
-//     })
-// }
-// const NetDisc = (resolve) => {
-//     import ('components/NetDisc/NetDisc').then((module) => {
-//         resolve(module)
-//     })
-// }
-// const NetMine = (resolve) => {
-//     import ('components/NetMine/NetMine').then((module) => {
-//         resolve(module)
-//     })
-// }
-// const TopList = (resolve) => {
-//     import ('components/TopList/TopList').then((module) => {
-//         resolve(module)
-//     })
-// }
-// const NetVideo = (resolve) => {
-//     import ('components/NetVideo/NetVideo').then((module) => {
-//         resolve(module)
-//     })
-// }
+const NetRecommend = (resolve) => {
+    import ('components/NetRecommend/NetRecommend').then((module) => {
+        resolve(module)
+    })
+}
+const NetSinger = (resolve) => {
+    import ('components/NetSinger/NetSinger').then((module) => {
+        resolve(module)
+    })
+}
+const NetRank = (resolve) => {
+    import ('components/NetRank/NetRank').then((module) => {
+        resolve(module)
+    })
+}
+const NetSearch = (resolve) => {
+    import ('components/NetSearch/NetSearch').then((module) => {
+        resolve(module)
+    })
+}
+const SingerDetail = (resolve) => {
+    import ('components/SingerDetail/SingerDetail').then((module) => {
+        resolve(module)
+    })
+}
+const NetDisc = (resolve) => {
+    import ('components/NetDisc/NetDisc').then((module) => {
+        resolve(module)
+    })
+}
+const NetMine = (resolve) => {
+    import ('components/NetMine/NetMine').then((module) => {
+        resolve(module)
+    })
+}
+const TopList = (resolve) => {
+    import ('components/TopList/TopList').then((module) => {
+        resolve(module)
+    })
+}
+const NetVideo = (resolve) => {
+    import ('components/NetVideo/NetVideo').then((module) => {
+        resolve(module)
+    })
+}
 
-// const VideoDetail = (resolve) => {
-//     import ('components/VideoDetail/VideoDetail').then((module) => {
-//         resolve(module)
-//     })
-// }
-// const NetList = (resolve) => {
-//     import ('components/NetList/NetList').then((module) => {
-//         resolve(module)
-//     })
-// }
-// const NetProject = (resolve) => {
-//     import ('components/NetProject/NetProject').then((module) => {
-//         resolve(module)
-//     })
-// }
+const VideoDetail = (resolve) => {
+    import ('components/VideoDetail/VideoDetail').then((module) => {
+        resolve(module)
+    })
+}
+const NetList = (resolve) => {
+    import ('components/NetList/NetList').then((module) => {
+        resolve(module)
+    })
+}
+const NetProject = (resolve) => {
+    import ('components/NetProject/NetProject').then((module) => {
+        resolve(module)
+    })
+}
 
 export default new Router({
     base: process.env.BASE_URL,
