@@ -79,21 +79,17 @@ module.exports = merge(common, {
 
         progress: true, // 显示打包的进度条
 
-        contentBase: distPath,
-
-        overlay: {
-            errors: true
-        },
-        proxy: {
-            '/api': {
-                target: 'http://127.0.0.1:3000',
-                changeOrigin: true // 支持跨域
-                    //     pathRewrite: { // 重写路径: 去掉路径中开头的'/api'
-                    //         '^/api': '/'
-                    //     }
-                    // }
-            }
-        }
+        contentBase: distPath
+            // proxy: {
+            //     '/api': {
+            //         target: 'http://127.0.0.1:3000',
+            //         changeOrigin: true // 支持跨域
+            //             //     pathRewrite: { // 重写路径: 去掉路径中开头的'/api'
+            //             //         '^/api': '/'
+            //             //     }
+            //             // }
+            //     }
+            // }
     },
     plugins: [
         new webpack.DefinePlugin({

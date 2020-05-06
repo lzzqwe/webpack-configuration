@@ -30,7 +30,7 @@
                 <img class="currenImg" v-lazy="currentSong.image" alt />
               </div>
               <div class="baseCls" :class="neeldeCls">
-                <img class="neeldeImg" src="./needle.png" alt />
+                <img class="neeldeImg" src="http://indust-creation.icci.top/needle.png" alt />
               </div>
             </div>
             <div class="playing-lyric">

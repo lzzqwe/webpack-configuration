@@ -2,7 +2,7 @@ import ajax from './ajax'
 let BASE = ''
 const env = process.env.NODE_ENV
 if (env === 'development') {
-    BASE = '/api'
+    BASE = 'http://127.0.0.1:3000'
 } else if (env === 'production') {
     BASE = ''
 }

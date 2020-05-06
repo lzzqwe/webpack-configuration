@@ -2,7 +2,7 @@
   <div class="project">
     <slide-bar :title="title"></slide-bar>
     <h1 class="project-title">点击以下文字访问</h1>
-    <img class="imgstyl" src="https://qq.yh31.com/tp/zjbq/202003131232201016.gif" alt />
+    <img class="imgstyl" src="http://indust-creation.icci.top/a8ec8a13632762d0e2c49adcacec08fa503dc6de.gif" alt />
     <a class="address" href="https://github.com/lzzqwe/Net_music.git">项目地址</a>
   </div>
 </template>
@@ -32,9 +32,10 @@ export default {
   background-color: @color-background;
 
   .project-title {
-    font-size: 20px;
+    font-size: 40px;
     margin: 50px;
     font-weight: normal;
+    text-shadow: 5px 5px 5px #FF0000;
   }
 
   .address {
@@ -48,6 +49,7 @@ export default {
   .imgstyl {
     width: 150px;
     height: 150px;
+    border-radius: 50%;
   }
 }
 </style>
