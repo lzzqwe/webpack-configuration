@@ -28,17 +28,22 @@
      },
      module: {
          rules: [{
+             test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
+             use: [{
+                     loader: 'file-loader',
+                     options: {
+                         esModule: false
+                     }
+                 }
+
+             ]
+         }, {
              test: /\.jsx?$/, //1.babel-loader 的优化
              use: ['babel-loader?cacheDirectory'], //开启缓存 只要是es6代码没有改的就会缓存下来
              exclude: file => ( //明确编译范围
                  /node_modules/.test(file) &&
                  !/\.vue\.js/.test(file)
              )
-         }, {
-             test: /\.(woff|woff2|eot|ttf|otf)$/,
-             use: [
-                 'file-loader'
-             ]
          }, {
              test: /\.vue$/,
              loader: 'vue-loader'

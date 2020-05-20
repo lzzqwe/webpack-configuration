@@ -144,6 +144,7 @@ export default {
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+          color: #303030;
         }
 
         .rank-update {
@@ -160,6 +161,7 @@ export default {
       padding-left: 25px;
       font-weight: 600;
       font-size: 20px;
+      color: #323232;
     }
 
     .item {
@@ -181,7 +183,6 @@ export default {
         flex: 1;
         margin-left: 10px;
         font-size: 10px;
-        background: #000;
         padding: 10px 0 0 10px;
         border-radius: 27px;
 
@@ -190,6 +191,7 @@ export default {
           line-height: 26px;
           width: 200px;
           display: flex;
+          color: #676767;
 
           .songlist-index {
             margin-right: 5px;

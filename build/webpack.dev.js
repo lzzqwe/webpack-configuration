@@ -10,16 +10,6 @@ module.exports = merge(common, {
     devtool: 'inline-source-map',
     module: {
         rules: [{
-            test: /\.(png|svg|jpg|gif)$/,
-            use: [{
-                    loader: 'file-loader',
-                    options: {
-                        esModule: false
-                    }
-                }
-
-            ]
-        }, {
             test: /\.css$/,
             use: [
                 'vue-style-loader',

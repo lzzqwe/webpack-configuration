@@ -1,9 +1,16 @@
  const merge = require('webpack-merge');
  const path = require('path');
  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+ /*
+  * 将CSS提取为独立的文件的插件，对每个包含css的js文件都会创建一个CSS文件，
+  * 支持按需加载css和sourceMap
+  * */
  const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+     // 压缩 js
  const TerserJSPlugin = require('terser-webpack-plugin')
+     //压缩单独的css文件
  const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+
  const common = require('./webpack.common.js');
 
  module.exports = merge(common, {
@@ -78,7 +85,14 @@
      ],
      optimization: {
          // 压缩 css
-         minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+         minimizer: [new TerserJSPlugin({
+             sourceMap: true,
+             terserOptions: {
+                 compress: {
+                     drop_console: true,
+                 },
+             },
+         }), new OptimizeCSSAssetsPlugin({})],
          usedExports: true, //tree-shakeing
          // 分割代码块
          splitChunks: {

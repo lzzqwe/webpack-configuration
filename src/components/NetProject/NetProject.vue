@@ -35,7 +35,7 @@ export default {
     font-size: 40px;
     margin: 50px;
     font-weight: normal;
-    text-shadow: 5px 5px 5px #FF0000;
+    text-shadow: 5px 5px 5px #000000;
   }
 
   .address {
@@ -43,7 +43,7 @@ export default {
     width: 300px;
     margin: 0 auto;
     display: block;
-    color: pink;
+    color: rgb(14, 13, 13);
   }
 
   .imgstyl {

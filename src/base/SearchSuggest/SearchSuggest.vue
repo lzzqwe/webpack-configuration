@@ -152,8 +152,10 @@ export default {
 
     .suggest-item {
       display: flex;
-      line-height: 22px;
-      padding-bottom: 20px;
+      line-height: 30px;
+      padding-bottom: 15px;
+      color: #333333;
+      .border-1px(#e5e5e5);
 
       .icon {
         margin-right: 10px;
